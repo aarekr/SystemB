@@ -1,5 +1,6 @@
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
+const { v1: uuid } = require('uuid')
 
 let drinks = [
     {
@@ -70,6 +71,16 @@ const typeDefs = `
     allDrinks: [Drink!]!
     findDrink(name: String!): Drink
   }
+
+  type Mutation {
+    addDrink(
+      name: String!
+      type: String
+      producer: String!
+      year: Int! 
+      country: String!
+    ): Drink
+  }
 `
 
 const resolvers = {
@@ -77,6 +88,20 @@ const resolvers = {
     drinkCount: () => drinks.length,
     allDrinks: () => drinks,
     findDrink: (root, args) => drinks.find(d => d.name === args.name)
+  },
+  Drink: {
+    name: (root) => root.name,
+    type: (root) => root.type,
+    producer: (root) => root.producer,
+    year: (root) => root.year,
+    country: (root) => root.country,
+  },
+  Mutation: {
+    addDrink: (root, args) => {
+      const drink = { ...args, id: uuid() }
+      drinks = drinks.concat(drink)
+      return drink
+    }
   }
 }
 

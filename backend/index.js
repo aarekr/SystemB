@@ -98,6 +98,14 @@ const resolvers = {
   },
   Mutation: {
     addDrink: (root, args) => {
+      if (drinks.find(d => d.name === args.name)) {
+        throw new GraphQLError('Drink name must be unique', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name
+          }
+        })
+      }
       const drink = { ...args, id: uuid() }
       drinks = drinks.concat(drink)
       return drink

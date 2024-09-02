@@ -1,7 +1,7 @@
-import { useQuery } from '@apollo/client'
-import { ALL_DRINKS } from './queries'
+import { useQuery } from "@apollo/client"
+import { ALL_DRINKS } from "./queries"
 
-const AllDrinks = (props) => {
+const Beers = (props) => {
     const result = useQuery(ALL_DRINKS)
 
     if (!props.show) {
@@ -12,23 +12,28 @@ const AllDrinks = (props) => {
         return <div>loading...</div>
     }
 
-    return ( 
+    let allBeers = []
+    for(let i=0; i<result.data.allDrinks.length; i++) {
+        if (result.data.allDrinks[i].type == 'Beer') {
+            allBeers = allBeers.concat(result.data.allDrinks[i])
+        }
+    }
+
+    return (
         <div>
             <table>
                 <tbody>
                     <tr>
                         <th>Name</th>
-                        <th>Type</th>
                         <th>Producer</th>
                         <th>Established</th>
                         <th>Country</th>
                     </tr>
                 </tbody>
-                {result.data.allDrinks.map(d => 
+                {allBeers.map(d => 
                     <tbody key={d.name}>
                         <tr>
                             <td>{d.name}</td>
-                            <td>{d.type}</td>
                             <td>{d.producer}</td>
                             <td align="center">{d.year}</td>
                             <td>{d.country}</td>
@@ -36,9 +41,9 @@ const AllDrinks = (props) => {
                     </tbody>
                 )}
             </table>
-            <p>Drinks in sortiment: {result.data.allDrinks.length}</p>
+            <p>Beers in sortiment: {allBeers.length}</p>
         </div>
     )
 }
 
-export default AllDrinks
+export default Beers

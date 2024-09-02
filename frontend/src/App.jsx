@@ -1,17 +1,6 @@
 import { useState } from 'react'
 import AllDrinks from './components/AllDrinks'
-
-/*const FIND_DRINK = gql`
-  query findDrinkByName($nameToSearch: String!) {
-    findDrink(name: $nameToSeacrh) {
-      name
-      type
-      producer
-      year
-      country
-    }
-  }
-`*/
+import Beers from './components/Beers'
 
 const App = () => {
   const [ page, setPage ] = useState('all')
@@ -21,10 +10,11 @@ const App = () => {
       <h1>System B</h1>
       <div>
         <button onClick={() => setPage("all")}>ALL</button>
+        <button onClick={() => setPage("beers")}>BEERS</button>
       </div>
       <hr />
       <AllDrinks show={page === "all"} />
-      
+      <Beers show={page === "beers"} />
     </div>
   )
 }

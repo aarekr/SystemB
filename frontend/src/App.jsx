@@ -1,8 +1,9 @@
-import { gql, useQuery } from '@apollo/client'
+import { useState } from 'react'
+import AllDrinks from './components/AllDrinks'
 
-const ALL_DRINKS = gql`
-  query {
-    allDrinks {
+/*const FIND_DRINK = gql`
+  query findDrinkByName($nameToSearch: String!) {
+    findDrink(name: $nameToSeacrh) {
       name
       type
       producer
@@ -10,19 +11,20 @@ const ALL_DRINKS = gql`
       country
     }
   }
-`
+`*/
 
 const App = () => {
-  const result = useQuery(ALL_DRINKS)
-  console.log("result: ", result)
-
-  if (result.loading)  {
-    return <div>loading...</div>
-  }
+  const [ page, setPage ] = useState('all')
 
   return (
     <div>
-      {result.data.allDrinks.map(d => <li>{d.name}</li>)}
+      <h1>System B</h1>
+      <div>
+        <button onClick={() => setPage("all")}>ALL</button>
+      </div>
+      <hr />
+      <AllDrinks show={page === "all"} />
+      
     </div>
   )
 }

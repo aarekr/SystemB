@@ -45,6 +45,20 @@ let drinks = [
         year: 1827,
         country: "Scotland",
     },
+    {
+        name: "Absolut Vanilia",
+        type: "Vodka",
+        producer: "Absolut Company",
+        year: 1917,
+        country: "Sweden",
+    },
+    {
+        name: "Finlandia Vodka",
+        type: "Vodka",
+        producer: "Anora Group",
+        year: 1970,
+        country: "Finland",
+    },
 ]
 
 /* template for new drinks

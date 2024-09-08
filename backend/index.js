@@ -2,64 +2,18 @@ const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
 const { v1: uuid } = require('uuid')
 
-let drinks = [
-    {
-        name: "Gambrinus",
-        type: "Beer",
-        producer: "Plzensky Prazdroj",
-        year: 1869,
-        country: "Czechia",
-    },
-    {
-        name: "Starobrno",
-        type: "Beer",
-        producer: "Pivovar Starobrno",
-        year: 1325,
-        country: "Czechia",
-    },
-    {
-        name: "Krusovice",
-        type: "Beer",
-        producer: "Kralovsky pivovar Krusovice",
-        year: 1581,
-        country: "Czechia",
-    },
-    {
-        name: "Hefeweissbier",
-        type: "Beer",
-        producer: "Bayerische Staatsbrauerei Weihenstephan",
-        year: 1040,
-        country: "Germany",
-    },
-    {
-        name: "Jameson",
-        type: "Whiskey",
-        producer: "Jameson Distillery",
-        year: 1780,
-        country: "Ireland",
-    },
-    {
-        name: "Ballantine's Finest",
-        type: "Whiskey",
-        producer: "George Ballantine and Son",
-        year: 1827,
-        country: "Scotland",
-    },
-    {
-        name: "Absolut Vanilia",
-        type: "Vodka",
-        producer: "Absolut Company",
-        year: 1917,
-        country: "Sweden",
-    },
-    {
-        name: "Finlandia Vodka",
-        type: "Vodka",
-        producer: "Anora Group",
-        year: 1970,
-        country: "Finland",
-    },
-]
+const mongoose = require('mongoose')
+mongoose.set('strictQuery', false)
+const Drink = require('./models/drink')
+require('dotenv').config()
+
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
 
 /* template for new drinks
 {
@@ -99,9 +53,12 @@ const typeDefs = `
 
 const resolvers = {
   Query: {
-    drinkCount: () => drinks.length,
-    allDrinks: () => drinks,
-    findDrink: (root, args) => drinks.find(d => d.name === args.name)
+    //drinkCount: () => drinks.length,
+    drinkCount: async () => await Drink.collection.countDocuments(),
+    //allDrinks: () => drinks,
+    allDrinks: async (root, args) => await Drink.find({}),
+    //findDrink: (root, args) => drinks.find(d => d.name === args.name)
+    findDrink: async (root, args) => await Drink.findOne({ name: args.name })
   },
   Drink: {
     name: (root) => root.name,

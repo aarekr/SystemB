@@ -2,12 +2,8 @@ import { useQuery } from "@apollo/client"
 import { ALL_DRINKS } from "./queries"
 import { DisplayDrinkType } from "./DisplayDrinkType"
 
-const Beers = (props) => {
+const Beers = () => {
     const result = useQuery(ALL_DRINKS)
-
-    if (!props.show) {
-        return null
-    }
 
     if (result.loading)  {
         return <div>loading...</div>

@@ -2,25 +2,25 @@ import { useQuery } from "@apollo/client"
 import { ALL_DRINKS } from "./queries"
 import { DisplayDrinkType } from "./DisplayDrinkType"
 
-const Whiskeys = () => {
+const Ciders = () => {
     const result = useQuery(ALL_DRINKS)
 
     if (result.loading)  {
         return <div>loading...</div>
     }
 
-    let allWhiskeys = []
+    let allCiders = []
     for(let i=0; i<result.data.allDrinks.length; i++) {
-        if (result.data.allDrinks[i].type == 'Whiskey') {
-            allWhiskeys = allWhiskeys.concat(result.data.allDrinks[i])
+        if (result.data.allDrinks[i].type == 'Cider') {
+            allCiders = allCiders.concat(result.data.allDrinks[i])
         }
     }
 
     return (
         <div>
-            <DisplayDrinkType drinkType={'Whiskey'} drinks={allWhiskeys} />
+            <DisplayDrinkType drinkType={'Cider'} drinks={allCiders} />
         </div>
     )
 }
 
-export default Whiskeys
+export default Ciders

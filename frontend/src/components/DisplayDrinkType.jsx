@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 export const DisplayDrinkType = ({ drinkType, drinks }) => {
     return (
         <div>

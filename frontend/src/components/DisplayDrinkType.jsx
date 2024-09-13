@@ -1,29 +1,35 @@
 /* eslint-disable react/prop-types */
 
+import { TableContainer, Table, TableBody,TableRow,TableCell, Paper } from '@mui/material'
+
 export const DisplayDrinkType = ({ drinkType, drinks }) => {
     return (
         <div>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Name</th>
-                        <th>Producer</th>
-                        <th>Established</th>
-                        <th>Country</th>
-                    </tr>
-                </tbody>
-                {drinks.map(d => 
-                    <tbody key={d.name}>
-                        <tr>
-                            <td>{d.name}</td>
-                            <td>{d.producer}</td>
-                            <td align="center">{d.year}</td>
-                            <td>{d.country}</td>
-                        </tr>
-                    </tbody>
-                )}
-            </table>
-            <p>{drinkType}s in sortiment: {drinks.length}</p>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell><h3>Name</h3></TableCell>
+                            <TableCell><h3>Type</h3></TableCell>
+                            <TableCell><h3>Producer</h3></TableCell>
+                            <TableCell><h3>Year</h3></TableCell>
+                            <TableCell><h3>Country</h3></TableCell>
+                        </TableRow>
+                    </TableBody>
+                    <TableBody>
+                        {drinks.map(drink => 
+                            <TableRow key={drink.name}>
+                                <TableCell>{drink.name}</TableCell>
+                                <TableCell>{drink.type}</TableCell>
+                                <TableCell>{drink.producer}</TableCell>
+                                <TableCell align="center">{drink.year}</TableCell>
+                                <TableCell>{drink.country}</TableCell>
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <p>{drinkType == 'All' ? 'Drinks' : `${drinkType}s`} in sortiment: {drinks.length}</p>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
-import { TableContainer, Table, TableBody,TableRow,TableCell, Paper } from '@mui/material'
+import { TableContainer, Table, TableBody,TableRow, Button, TableCell, Paper } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 export const DisplayDrinkType = ({ drinkType, drinks }) => {
     return (
@@ -19,6 +20,8 @@ export const DisplayDrinkType = ({ drinkType, drinks }) => {
                     <TableBody>
                         {drinks.map(drink => 
                             <TableRow key={drink.name}>
+                                <TableCell><Button variant="outlined" 
+                                    component={Link} to="/drinkinfopage">Info</Button></TableCell>
                                 <TableCell>{drink.name}</TableCell>
                                 <TableCell>{drink.type}</TableCell>
                                 <TableCell>{drink.producer}</TableCell>

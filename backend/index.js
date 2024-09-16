@@ -15,6 +15,7 @@ mongoose.connect(process.env.MONGODB_URI)
     console.log('error connection to MongoDB:', error.message)
   })
 
+let drinks = []
 /* template for new drinks
 {
         name: "",
@@ -45,7 +46,7 @@ const typeDefs = `
       name: String!
       type: String
       producer: String!
-      year: Int! 
+      year: Int
       country: String!
     ): Drink
   }
@@ -69,17 +70,18 @@ const resolvers = {
   },
   Mutation: {
     addDrink: (root, args) => {
-      if (drinks.find(d => d.name === args.name)) {
+      /*if (drinks.find(d => d.name === args.name)) {
         throw new GraphQLError('Drink name must be unique', {
           extensions: {
             code: 'BAD_USER_INPUT',
             invalidArgs: args.name
           }
         })
-      }
-      const drink = { ...args, id: uuid() }
+      }*/
+      const drink = { ...args }  // , id: uuid()
       drinks = drinks.concat(drink)
-      return drink
+      console.log("drink: ", drink)
+      return drink//.save()
     }
   }
 }

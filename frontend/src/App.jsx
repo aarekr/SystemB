@@ -16,12 +16,12 @@ const App = () => {
         <AppBar color="secondary" position="static">
           <Toolbar>
             <IconButton edge="start" color="inherit" aria-label="menu">System B</IconButton>
-            <Button color="inherit" component={Link} to="/">Home</Button>
-            <Button color="inherit" component={Link} to="/beers">Beers</Button>
-            <Button color="inherit" component={Link} to="/ciders">Ciders</Button>
-            <Button color="inherit" component={Link} to="/vodkas">Vodkas</Button>
-            <Button color="inherit" component={Link} to="/whiskeys">Whiskeys</Button>
-            <Button color="inherit" component={Link} to="/addnewdrink">ADD</Button>
+            <Button color="inherit" id="home-link" component={Link} to="/">Home</Button>
+            <Button color="inherit" id="beers-link" component={Link} to="/beers">Beers</Button>
+            <Button color="inherit" id="ciders-link" component={Link} to="/ciders">Ciders</Button>
+            <Button color="inherit" id="vodkas-link" component={Link} to="/vodkas">Vodkas</Button>
+            <Button color="inherit" id="whiskeys-link" component={Link} to="/whiskeys">Whiskeys</Button>
+            <Button color="inherit" id="add-drinks-link" component={Link} to="/addnewdrink">ADD</Button>
           </Toolbar>
         </AppBar>
         <Routes>

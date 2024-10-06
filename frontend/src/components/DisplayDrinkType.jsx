@@ -10,6 +10,7 @@ export const DisplayDrinkType = ({ drinkType, drinks }) => {
                 <Table>
                     <TableBody>
                         <TableRow>
+                            <TableCell></TableCell>
                             <TableCell><h3>Name</h3></TableCell>
                             <TableCell><h3>Type</h3></TableCell>
                             <TableCell><h3>Producer</h3></TableCell>
